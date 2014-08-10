@@ -8,7 +8,7 @@ import javapns.notification.PushNotificationPayload;
 
 public class Pusher {
     // apns를 이용하기위한  Apple 에서 제공하는 서버, 포트
-    private static final String HOST = "gateway.push.apple.com";
+    private static final String HOST = "gateway.sandbox.push.apple.com";
     private static final int PORT = 2195;
  
     private static String iPhoneID ; // 단말기토큰;

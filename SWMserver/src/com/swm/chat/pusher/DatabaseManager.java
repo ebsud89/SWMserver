@@ -3,6 +3,8 @@ package com.swm.chat.pusher;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.swm.utils.JDBCutils;
+
 public class DatabaseManager {
 
 	// instant value list
@@ -11,6 +13,15 @@ public class DatabaseManager {
 	public DatabaseManager () {
 	
 		// try-catch : connection
+		try {
+			
+			Connection conn = JDBCutils.getConnection();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 	
 	
