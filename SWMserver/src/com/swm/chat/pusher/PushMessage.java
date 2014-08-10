@@ -19,4 +19,7 @@ public class PushMessage {
 		this.divToken = utoken;
 		this.msg = msg;
 	}
+	
+	
+	
 }
