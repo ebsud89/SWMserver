@@ -19,6 +19,5 @@ public class RoomOptCode {
 		this.roomopt.put(11, "microwave");
 		this.roomopt.put(12, "oven");
 		this.roomopt.put(13, "bathtub");
-
 	}
 }

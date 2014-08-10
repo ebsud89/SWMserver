@@ -4,13 +4,14 @@ import java.util.HashMap;
 
 public class RoomRule {
 
-//	private HashMap<Boolean, String> roomrule; = new HashMap<Integer, String>();
+	private HashMap<Integer, String> roomrule = new HashMap<Integer, String>();
 	
 	public RoomRule() {
-		// TODO Auto-generated constructor stub
-		
-//		this.roomrule.put(false, "친구 초");
-		// need to 
+		this.roomrule.put(1, "invite");
+		this.roomrule.put(2, "pet");
+		this.roomrule.put(3, "private");
+		this.roomrule.put(4, "smoke");
+		this.roomrule.put(5, "drink");
 		
 	}
 }
