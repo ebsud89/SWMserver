@@ -15,6 +15,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.29-bin.jar"/>
-	<classpathentry kind="lib" path="/Users/ebsud89/Documents/workspace/SWMserver/WebContent/WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="lib" path="/Users/ebsud89/git/SWMserver/SWMserver/WebContent/WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="lib" path="/Users/ebsud89/git/SWMserver/SWMserver/lib/JavaPNS_2.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

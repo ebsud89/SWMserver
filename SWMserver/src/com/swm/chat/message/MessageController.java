@@ -31,6 +31,32 @@ public class MessageController extends AbstractController {
 		
 		
 		// here are function's code
+		
+		String uri = getURI(request);
+		request.setCharacterEncoding("UTF-8");
+		
+		if ("/content/getAllContent".equals(uri)) {
+			receiveMsg(request, response);
+		} else if ("/content/addContent".equals(uri)) {
+			sendMsg(request, response);
+		} 
+		else {
+			// set logger
+//			logger = new Logger();
+//			logger.log("Exception detected in 'ContentController'");
+		}
+	}
+
+	private void sendMsg(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void receiveMsg(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
