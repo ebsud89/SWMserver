@@ -1,6 +1,8 @@
 package com.swm.data.user;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,15 +36,58 @@ public class UserController extends AbstractController {
 		
 		
 		if ("/user/userSignIn".equals(uri)) {
-			//userSignIn(request, response);
-		} else if ("/user/userSignUp".equals(uri)) {
-			//userSignUp(request, response);
+			userFbRegister(request, response);
+		} else if ("/user/userAuth".equals(uri)) {
+			userAuth(request, response);
 		}
 		else {
 			// set Logger
 //			logger = new Logger();
 //			logger.log("Exception Detected in 'UserController'");
 		}
+	}
+
+	private void userFbRegister(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		String resultStr = "";
+		
+		try {
+			
+			
+			
+			resultStr = "success";
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			resultStr = "fail";
+		}
+		
+		request.setAttribute("result", resultStr);
+		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/result.jsp");
+		rd.forward(request, response);	
+	}
+
+	private void userAuth(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		String resultStr = "";
+		
+		
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+
+		request.setAttribute("result", resultStr);
+		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/result.jsp");
+		rd.forward(request, response);	
 	}
 
 }
