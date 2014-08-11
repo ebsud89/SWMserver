@@ -8,18 +8,14 @@ import javapns.notification.PushNotificationPayload;
 
 public class Pusher {
     // apns를 이용하기위한  Apple 에서 제공하는 서버, 포트
-    private static final String HOST = "gateway.sandbox.push.apple.com";
+    private static final String HOST = "gateway.push.apple.com";
     private static final int PORT = 2195;
  
-    private String iPhoneID; // 단말기토큰;
-    private static String certi = "/home/ebsud89/"; // 인증서(경로포함 가능);
-    private static String passwd = ""; // 인증서암호; 
+    private static String iPhoneID ; // 단말기토큰;
+    private static String certi ; // 인증서(경로포함 가능);
+    private static String passwd ; // 인증서암호; 
  
-    public Pusher (String udid) {
-    	this.iPhoneID = udid;
-    }
-    
-    public void pushApple() throws Exception{
+    public static void main(String args[]) throws Exception{
   
         try{
             // javaPNS 에서 제공하는 IOS push Msg를 만들어주는 클래스
