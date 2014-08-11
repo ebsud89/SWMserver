@@ -11,11 +11,15 @@ public class Pusher {
     private static final String HOST = "gateway.sandbox.push.apple.com";
     private static final int PORT = 2195;
  
-    private static String iPhoneID ; // 단말기토큰;
-    private static String certi ; // 인증서(경로포함 가능);
-    private static String passwd ; // 인증서암호; 
+    private String iPhoneID; // 단말기토큰;
+    private static String certi = "/home/ebsud89/"; // 인증서(경로포함 가능);
+    private static String passwd = ""; // 인증서암호; 
  
-    public static void main(String args[]) throws Exception{
+    public Pusher (String udid) {
+    	this.iPhoneID = udid;
+    }
+    
+    public void pushApple() throws Exception{
   
         try{
             // javaPNS 에서 제공하는 IOS push Msg를 만들어주는 클래스
