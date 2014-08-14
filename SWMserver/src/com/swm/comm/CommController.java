@@ -4,8 +4,12 @@ import com.swm.data.room.RoomDAO;
 import com.swm.data.room.RoomVO;
 import com.swm.data.user.UserDAO;
 import com.swm.data.user.UserVO;
+import com.swm.deal.DealDAO;
+import com.swm.deal.DealVO;
 import com.swm.utils.AbstractController;
+
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -42,10 +46,10 @@ public class CommController extends AbstractController {
 		// Room 관련
 		if ("/comm/getAllRooms".equals(uri)) {
 			getAllRooms(request, response);
-		} else if ("/comm/reauestRank".equals(uri)) {
-			
+		} else if ("/comm/requestRank".equals(uri)) {
+
 		} else if ("/comm/regRoom".equals(uri)) {
-			
+			regRoom(request, response);
 		} else if ("/comm/getRoomDetail".equals(uri)) {
 			getRoomDetail(request, response);
 		}
@@ -60,11 +64,24 @@ public class CommController extends AbstractController {
 				
 		
 		// deal 관련
-		
+		else if("/comm/CompareWithRoom".equals(uri)){
+			//using MatchProc
+			//filtering, ranking
+			//sending data
+			CompareWithRoom(request, response);
+		}
 				
 		// User 관련 
 		else if ("/comm/regUser".equals(uri)) {
 			regUser(request, response);
+		} else if("/comm/UserLogin".equals(uri)){
+			//Login by DB
+			try {
+				UserLogin(request, response);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			// set logger
 			// logger = new Logger();
@@ -148,6 +165,69 @@ public class CommController extends AbstractController {
 		rd.forward(request, response);
 		
 	}
+	
+	private void regRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		// getParameter
+		// 직업, 나이, 성별, 이름
+		String name = request.getParameter("name");
+		int hostid = Integer.parseInt(request.getParameter("hostid"));
+		String doname = request.getParameter("doname");
+		String siname = request.getParameter("siname");
+		String dongname = request.getParameter("dongname");
+		String stationName = request.getParameter("stationName");
+		int rent = Integer.parseInt(request.getParameter("rent"));
+		int guaranty = Integer.parseInt(request.getParameter("guaranty"));
+		int management = Integer.parseInt(request.getParameter("management"));
+		String options = request.getParameter("options");
+		String infos = request.getParameter("infos");
+		String rules = request.getParameter("rules");
+		String styles = request.getParameter("styles");
+		int premiumCode = Integer.parseInt(request.getParameter("premiumCode"));
+		int total = Integer.parseInt(request.getParameter("total"));
+		int avaliable = Integer.parseInt(request.getParameter("avaliable"));
+		int msex = Integer.parseInt(request.getParameter("msex"));
+		int wsex = Integer.parseInt(request.getParameter("wsex"));
+		
+		RoomVO roomVO = new RoomVO();
+		RoomDAO roomDAO = new RoomDAO();
+
+		roomVO.setName(name);
+		roomVO.setHostid(hostid);
+		roomVO.setDoname(doname);
+		roomVO.setSiname(siname);
+		roomVO.setDongname(dongname);
+		roomVO.setStationName(stationName);
+		roomVO.setRent(rent);
+		roomVO.setGuaranty(guaranty);
+		roomVO.setManagement(management);
+		roomVO.setOptions(options);
+		roomVO.setInfos(infos);
+		roomVO.setStyles(styles);
+		roomVO.setPremiumCode(premiumCode);
+		roomVO.setTotal(total);
+		roomVO.setAvaliable(avaliable);
+		roomVO.setMsex(msex);
+		roomVO.setWsex(wsex);
+		roomVO.setJaccard(0);
+
+		int result = roomDAO.regRoom(roomVO);
+		String resultStr = null;
+
+		if (result == 1) {
+			resultStr = "success";
+		} else {
+			resultStr = "fail";
+		}
+
+		request.setAttribute("result", resultStr);
+
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(
+				"/result.jsp");
+		rd.forward(request, response);
+	
+	}
 
 	private void regUser(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -192,7 +272,50 @@ public class CommController extends AbstractController {
 	private void getAllRooms(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		RoomDAO rDAO = new RoomDAO();
+		rDAO.getAR();
 	}
+	
+	private void CompareWithRoom(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException{
+		DealDAO Ddao = new DealDAO();
+		RoomDAO Rdao = new RoomDAO();
+		
+		DealVO Dvo = new DealVO();
+		ArrayList<DealVO> member = new ArrayList<DealVO>();
 
+		request.setAttribute("result", Rdao.ArraytoJSON(Rdao.sorting(Rdao.filtering(Dvo))));
+
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(
+				"/result.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void UserLogin(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException, SQLException{
+		String fbid = request.getParameter("fbid");
+		String uname = request.getParameter("uname");
+		
+		UserVO userVo = new UserVO();
+		UserDAO userDao = new UserDAO();
+
+		userVo.setFbid(fbid);
+		userVo.setUname(uname);
+		
+		int result = userDao.Login(userVo);
+		
+		String resultStr = null;
+		
+		if (result == 1) {
+			resultStr = "success";
+		} else {
+			resultStr = "fail";
+		}
+
+		request.setAttribute("result", resultStr);
+
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(
+				"/result.jsp");
+		rd.forward(request, response);
+	}
 }

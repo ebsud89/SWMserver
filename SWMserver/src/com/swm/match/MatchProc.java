@@ -7,11 +7,6 @@ import com.swm.data.room.RoomVO;
 import com.swm.data.user.UserVO;
 
 public class MatchProc {
-	
-	public MatchProc (ArrayList<RoomVO> rvo, UserVO uvo) {
-		
-	}
-	
 	//jaccard 
 	public float jaccard_index(String new_option, String options, String new_infos, String infos){
 		StringTokenizer db_tokenOpt = new StringTokenizer(options);
