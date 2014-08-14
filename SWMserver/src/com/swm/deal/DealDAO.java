@@ -2,13 +2,13 @@ package com.swm.deal;
 
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.swm.data.room.RoomVO;
 
 public class DealDAO {
-	public ArrayList<DealVO> JSONParsing(JSONObject finder, DealVO Dvo){
+	public DealVO JSONParsing(JSONObject finder, DealVO Dvo){
 		ArrayList<DealVO> member = new ArrayList<DealVO>();
 		try{
 			JSONArray jarray = new JSONArray();
@@ -23,10 +23,10 @@ public class DealDAO {
 			Dvo.setOptions(finder.get("options").toString());
 			Dvo.setInfos(finder.get("infos").toString());
 			Dvo.setRules(finder.get("rules").toString());
-			member.add(0, Dvo);
+			//member.add(0, Dvo);
 			//System.out.println(member.get(0).getName()+member.get(0).getStation()+member.get(0).getOptions());
 		}catch(Exception e){	
 		}
-		return member;
+		return Dvo;
 	}
 }

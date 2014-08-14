@@ -11,12 +11,17 @@ import com.swm.utils.AbstractController;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 /**
  * Servlet implementation class CommController
@@ -47,7 +52,7 @@ public class CommController extends AbstractController {
 		if ("/comm/getAllRooms".equals(uri)) {
 			getAllRooms(request, response);
 		} else if ("/comm/requestRank".equals(uri)) {
-
+			//compareWithRoom과 같음
 		} else if ("/comm/regRoom".equals(uri)) {
 			regRoom(request, response);
 		} else if ("/comm/getRoomDetail".equals(uri)) {
@@ -68,7 +73,12 @@ public class CommController extends AbstractController {
 			//using MatchProc
 			//filtering, ranking
 			//sending data
-			CompareWithRoom(request, response);
+			try {
+				CompareWithRoom(request, response);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 				
 		// User 관련 
@@ -165,12 +175,11 @@ public class CommController extends AbstractController {
 		rd.forward(request, response);
 		
 	}
-	
+	//
 	private void regRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
 		// getParameter
-		// 직업, 나이, 성별, 이름
 		String name = request.getParameter("name");
 		int hostid = Integer.parseInt(request.getParameter("hostid"));
 		String doname = request.getParameter("doname");
@@ -189,6 +198,7 @@ public class CommController extends AbstractController {
 		int avaliable = Integer.parseInt(request.getParameter("avaliable"));
 		int msex = Integer.parseInt(request.getParameter("msex"));
 		int wsex = Integer.parseInt(request.getParameter("wsex"));
+		
 		
 		RoomVO roomVO = new RoomVO();
 		RoomDAO roomDAO = new RoomDAO();
@@ -211,7 +221,8 @@ public class CommController extends AbstractController {
 		roomVO.setMsex(msex);
 		roomVO.setWsex(wsex);
 		roomVO.setJaccard(0);
-
+		
+		//
 		int result = roomDAO.regRoom(roomVO);
 		String resultStr = null;
 
@@ -277,14 +288,18 @@ public class CommController extends AbstractController {
 	}
 	
 	private void CompareWithRoom(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException{
+			HttpServletResponse response) throws ServletException, IOException, JSONException{
+	
+		String jsonparam = request.getParameter("json");
+		JSONObject jsonobj = new JSONObject(jsonparam);
+		
 		DealDAO Ddao = new DealDAO();
 		RoomDAO Rdao = new RoomDAO();
 		
 		DealVO Dvo = new DealVO();
 		ArrayList<DealVO> member = new ArrayList<DealVO>();
 
-		request.setAttribute("result", Rdao.ArraytoJSON(Rdao.sorting(Rdao.filtering(Dvo))));
+		request.setAttribute("result", Rdao.ArraytoJSON(Rdao.sorting(Rdao.filtering(Ddao.JSONParsing(jsonobj, Dvo)))));
 
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(
 				"/result.jsp");

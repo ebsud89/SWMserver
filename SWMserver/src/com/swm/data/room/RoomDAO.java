@@ -22,12 +22,12 @@ public class RoomDAO {
 
 	private static String GET_ROOM_DETAIL = "SELECT * FROM room WHERE id=?";
 	private static String GET_ALL_ROOMS = "SELECT * FROM room";
-	private static String REG_USER = "insert into room (name,hostid,station, rent, guaranty, management, options, infos, rules, premium, total, available, styles, time, way) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static String REG_USER = "insert into room (name,hostid,doname,siname,dongname,stationname,rent,  guaranty, management, options, infos, rules, styles, premiumcode, total, avaliable, msex, wsex) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public ArrayList<RoomVO> getMatchRank(UserVO uvo, RoomVO rvo, int sex) {
 		// TODO Auto-generated method stub
 
 		ArrayList<RoomVO> roomList = new ArrayList<RoomVO>();
-
+		
 		// 자료구조 정해야함 ...
 		return roomList;
 	}
@@ -36,30 +36,48 @@ public class RoomDAO {
 	public int regRoom(RoomVO vo) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
-		PreparedStatement stmt = null;
+		PreparedStatement pstmt = null;
 		int result = 0;
 
 		try {
 
 			conn = JDBCutils.getConnection();
 
-			stmt = conn.prepareStatement(REG_USER);
+			pstmt = conn.prepareStatement(REG_USER);
 
 			int idx = 1;
 
 			// query 수정
-			stmt.setInt(idx++, vo.getRid());
-
-			result = stmt.executeUpdate();
+			pstmt.setString(idx++, vo.getName());
+			pstmt.setInt(idx++, vo.getHostid());
+			pstmt.setString(idx++, vo.getDoname());
+			pstmt.setString(idx++, vo.getSiname());
+			pstmt.setString(idx++, vo.getDongname());
+			pstmt.setString(idx++, vo.getStationName());
+			pstmt.setInt(idx++, vo.getRent());
+			pstmt.setInt(idx++, vo.getGuaranty());
+			pstmt.setInt(idx++, vo.getManagement());
+			pstmt.setString(idx++, vo.getOptions());
+			pstmt.setString(idx++, vo.getInfos());
+			pstmt.setString(idx++, vo.getRules());
+			pstmt.setString(idx++, vo.getStyles());
+			pstmt.setInt(idx++, vo.getPremiumCode());
+			pstmt.setInt(idx++, vo.getTotal());
+			pstmt.setInt(idx++, vo.getAvaliable());
+			pstmt.setInt(idx++, vo.getMsex());
+			pstmt.setInt(idx, vo.getWsex());
+			
+			result = pstmt.executeUpdate();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			JDBCutils.close(stmt, conn);
+			JDBCutils.close(pstmt, conn);
 		}
 
 		return result;
 	}
+	
 	public void getAR() {
 		// TODO Auto-generated method stub
 		Connection conn = null;
@@ -79,6 +97,7 @@ public class RoomDAO {
 			JDBCutils.close(stmt, conn);
 		}
 	}
+	
 	public RoomVO getRoomDetail(RoomVO rvo) {
 
 		Connection conn = null;
@@ -150,7 +169,7 @@ public class RoomDAO {
 				Rvo.setAvaliable(rs.getInt("available"));
 				Rvo.setOptions(rs.getString("options"));
 				Rvo.setJaccard(mp.jaccard_index(dvo.getOptions(),
-						Rvo.getOptions(), dvo.getInfos(), Rvo.getOptions()));
+							Rvo.getOptions(), dvo.getInfos(), Rvo.getOptions()));
 				RoomList.add(Rvo);// RoomList 배열에 jaccard 값 대입
 			}
 			rs.close();
