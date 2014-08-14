@@ -35,9 +35,9 @@ public class MessageController extends AbstractController {
 		String uri = getURI(request);
 		request.setCharacterEncoding("UTF-8");
 		
-		if ("/content/getAllContent".equals(uri)) {
+		if ("/msg/receiveMsg".equals(uri)) {
 			receiveMsg(request, response);
-		} else if ("/content/addContent".equals(uri)) {
+		} else if ("/msg/sendMsg".equals(uri)) {
 			sendMsg(request, response);
 		} 
 		else {

@@ -2,7 +2,7 @@ package com.swm.data.room;
 
 public class RoomVO {
 
-	int id;
+	int rid;
 	String name;
 	int hostid;
 	String addr;
@@ -17,15 +17,18 @@ public class RoomVO {
 	String options;
 	String infos;
 	String rules;
+	String styles;
 	int premiumCode;
 	int total;
 	int avaliable;
+	int msex;
+	int wsex;
 	
-	public int getId() {
-		return id;
+	public int getRid() {
+		return rid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setRid(int rid) {
+		this.rid = rid;
 	}
 	public String getName() {
 		return name;
@@ -133,7 +136,7 @@ public class RoomVO {
 	@Override
 	// need to convert JSON style
 	public String toString() {
-		return "RoomVO [id=" + id + ", name=" + name + ", hostid=" + hostid
+		return "RoomVO [rid=" + rid + ", name=" + name + ", hostid=" + hostid
 				+ ", addr=" + addr + ", doname=" + doname + ", siname="
 				+ siname + ", dongname=" + dongname + ", stationName="
 				+ stationName + ", stationCode=" + stationCode + ", rent="
@@ -141,6 +144,24 @@ public class RoomVO {
 				+ management + ", options=" + options + ", infos=" + infos
 				+ ", rules=" + rules + ", premiumCode=" + premiumCode
 				+ ", total=" + total + ", avaliable=" + avaliable + "]";
+	}
+	public int getMsex() {
+		return msex;
+	}
+	public void setMsex(int msex) {
+		this.msex = msex;
+	}
+	public int getWsex() {
+		return wsex;
+	}
+	public void setWsex(int wsex) {
+		this.wsex = wsex;
+	}
+	public String getStyles() {
+		return styles;
+	}
+	public void setStyles(String styles) {
+		this.styles = styles;
 	}
 	
 }

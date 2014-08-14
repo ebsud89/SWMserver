@@ -4,9 +4,46 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.swm.utils.JDBCutils;
+
 public class UserDAO {
 
 	// sql query statements
-	private static String ADD_USER = null;
+	private static String REG_USER = "insert into member (name, age, sex, job, opt) values (?,?,?,?,?,?,?,?,?)";
+
+	public int regUser(UserVO vo) {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int result = 0;
+		
+		try {
+			
+			conn = JDBCutils.getConnection();
+			
+			stmt = conn.prepareStatement(REG_USER);
+			
+			int idx = 1;
+			
+			// query 수정 
+			stmt.setString(idx++, vo.getFbid());
+
+			
+			result = stmt.executeUpdate();
+			
+		} catch ( Exception ex ) {
+			ex.printStackTrace();
+		} finally {
+			JDBCutils.close(stmt, conn);
+		}
+		
+		
+		return result;
+	}
+
+	public int setUserMatchInfo(UserVO uvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
