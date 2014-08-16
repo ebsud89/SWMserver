@@ -27,8 +27,11 @@ public class UserDAO {
 			
 			// query 수정 
 			stmt.setString(idx++, vo.getFbid());
+			stmt.setInt(idx++, vo.getAge());
+			stmt.setInt(idx++, vo.getSex());
+			stmt.setInt(idx++, vo.getJob());
+			stmt.setInt(idx++, vo.getOpt());
 
-			
 			result = stmt.executeUpdate();
 			
 		} catch ( Exception ex ) {

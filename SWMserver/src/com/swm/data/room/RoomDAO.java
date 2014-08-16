@@ -115,12 +115,25 @@ public class RoomDAO {
 			rs = stmt.executeQuery();
 
 			resvo.setRid(rs.getInt("id"));
+			resvo.setName(rs.getString("name"));
+			resvo.setStationName(rs.getString("stationName"));;
+			resvo.setHostid(rs.getInt("hostid"));
+			resvo.setDoname(rs.getString("doname"));
+			resvo.setSiname(rs.getString("siname"));
+			resvo.setDongname(rs.getString("dongname"));
+			resvo.setStationCode(rs.getInt("stationCode"));
+			resvo.setRent(rs.getInt("rent"));
+			resvo.setGuaranty(rs.getInt("guaranty"));
+			resvo.setManagement(rs.getInt("management"));
+			resvo.setOptions(rs.getString("options"));
 			resvo.setInfos(rs.getString("infos"));
 			resvo.setRules(rs.getString("rules"));
 			resvo.setStyles(rs.getString("styles"));
-			resvo.setRent(rs.getInt("rent"));
-			resvo.setGuaranty(rs.getInt("rent:"));
-			resvo.setAvaliable(rs.getInt("availiable"));
+			resvo.setPremiumCode(rs.getInt("premiumCode"));
+			resvo.setTotal(rs.getInt("total"));
+			resvo.setAvaliable(rs.getInt("avaliable"));
+			resvo.setMsex(rs.getInt("msex"));
+			resvo.setWsex(rs.getInt("wsex"));
 			// more attribute
 
 		} catch (Exception e) {
@@ -148,8 +161,7 @@ public class RoomDAO {
 		ResultSet rs = null;
 		MatchProc mp = new MatchProc();
 		try {
-			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/web_java", "root", "mh0329");
+			conn = JDBCutils.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(FILTER_ROOM);
 			while (rs.next()) {
