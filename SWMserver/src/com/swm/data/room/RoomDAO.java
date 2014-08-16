@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -78,24 +79,50 @@ public class RoomDAO {
 		return result;
 	}
 	
-	public void getAR() {
+	public ArrayList<RoomVO> getAR() {
 		// TODO Auto-generated method stub
+		ArrayList<RoomVO> RoomList = new ArrayList<RoomVO>();
+		RoomDAO dao = new RoomDAO();
+		RoomVO rvo = new RoomVO();
+		
 		Connection conn = null;
-		PreparedStatement stmt = null;
-		int result = 0;
-
-		try {
-
-			conn = JDBCutils.getConnection();
-
-			stmt = conn.prepareStatement(GET_ALL_ROOMS);
-
-			result = stmt.executeUpdate();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			JDBCutils.close(stmt, conn);
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/web_java", "root", "mh0329");
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(GET_ALL_ROOMS);
+			while(rs.next()){
+				rvo.setName(rs.getString("name"));
+				rvo.setStationName(rs.getString("stationName"));;
+				rvo.setHostid(rs.getInt("hostid"));
+				rvo.setDoname(rs.getString("doname"));
+				rvo.setSiname(rs.getString("siname"));
+				rvo.setDongname(rs.getString("dongname"));
+				rvo.setStationCode(rs.getInt("stationCode"));
+				rvo.setRent(rs.getInt("rent"));
+				rvo.setGuaranty(rs.getInt("guaranty"));
+				rvo.setManagement(rs.getInt("management"));
+				rvo.setOptions(rs.getString("options"));
+				rvo.setInfos(rs.getString("infos"));
+				rvo.setRules(rs.getString("rules"));
+				rvo.setStyles(rs.getString("styles"));
+				rvo.setPremiumCode(rs.getInt("premiumCode"));
+				rvo.setTotal(rs.getInt("total"));
+				rvo.setAvaliable(rs.getInt("avaliable"));
+				rvo.setMsex(rs.getInt("msex"));
+				rvo.setWsex(rs.getInt("wsex"));
+				RoomList.add(rvo);//RoomList 배열에 jaccard 값 대입
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch(SQLException e){
+			System.out.println("ERROR : "+e);
 		}
+
+		return RoomList;
 	}
 	
 	public RoomVO getRoomDetail(RoomVO rvo) {
