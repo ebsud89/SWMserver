@@ -20,8 +20,6 @@ import com.swm.match.MatchProc;
 import com.swm.utils.JDBCutils;
 
 public class RoomDAO {
-
-	private static String GET_ROOM_DETAIL = "SELECT * FROM room WHERE id=?";
 	private static String GET_ALL_ROOMS = "SELECT * FROM room";
 	private static String REG_USER = "insert into room (name,hostid,doname,siname,dongname,stationname,rent,  guaranty, management, options, infos, rules, styles, premiumcode, total, avaliable, msex, wsex) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public ArrayList<RoomVO> getMatchRank(UserVO uvo, RoomVO rvo, int sex) {
@@ -126,36 +124,45 @@ public class RoomDAO {
 	}
 	
 	public RoomVO getRoomDetail(RoomVO rvo) {
-
+		int id = 0;
+		String GET_ROOM_DETAIL = "SELECT * FROM room WHERE id = "+id;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
-		RoomVO resvo = new RoomVO();
-
-		try {
-			conn = JDBCutils.getConnection();
-			stmt = conn.prepareStatement(GET_ROOM_DETAIL);
-
-			stmt.setInt(1, rvo.getRid());
-
-			rs = stmt.executeQuery();
-
-			resvo.setRid(rs.getInt("id"));
-			resvo.setInfos(rs.getString("infos"));
-			resvo.setRules(rs.getString("rules"));
-			resvo.setStyles(rs.getString("styles"));
-			resvo.setRent(rs.getInt("rent"));
-			resvo.setGuaranty(rs.getInt("rent:"));
-			resvo.setAvaliable(rs.getInt("availiable"));
-			// more attribute
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCutils.close(stmt, conn);
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/web_java", "root", "mh0329");
+			stmt = (PreparedStatement) conn.createStatement();
+			rs = stmt.executeQuery(GET_ALL_ROOMS);
+			while(rs.next()){
+				rvo.setName(rs.getString("name"));
+				rvo.setStationName(rs.getString("stationName"));;
+				rvo.setHostid(rs.getInt("hostid"));
+				rvo.setDoname(rs.getString("doname"));
+				rvo.setSiname(rs.getString("siname"));
+				rvo.setDongname(rs.getString("dongname"));
+				rvo.setStationCode(rs.getInt("stationCode"));
+				rvo.setRent(rs.getInt("rent"));
+				rvo.setGuaranty(rs.getInt("guaranty"));
+				rvo.setManagement(rs.getInt("management"));
+				rvo.setOptions(rs.getString("options"));
+				rvo.setInfos(rs.getString("infos"));
+				rvo.setRules(rs.getString("rules"));
+				rvo.setStyles(rs.getString("styles"));
+				rvo.setPremiumCode(rs.getInt("premiumCode"));
+				rvo.setTotal(rs.getInt("total"));
+				rvo.setAvaliable(rs.getInt("avaliable"));
+				rvo.setMsex(rs.getInt("msex"));
+				rvo.setWsex(rs.getInt("wsex"));
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch(SQLException e){
+			System.out.println("ERROR : "+e);
 		}
-		return resvo;
+
+		return rvo;
 	}
 
 	public ArrayList<RoomVO> filtering(DealVO dvo) {
