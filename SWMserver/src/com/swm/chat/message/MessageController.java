@@ -1,6 +1,9 @@
 package com.swm.chat.message;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +42,9 @@ public class MessageController extends AbstractController {
 			receiveMsg(request, response);
 		} else if ("/msg/sendMsg".equals(uri)) {
 			sendMsg(request, response);
-		} 
+		} else if ("/msg/getMsg".equals(uri)) {
+			getAllMsg(request, response);
+		}
 		else {
 			// set logger
 //			logger = new Logger();
@@ -47,9 +52,43 @@ public class MessageController extends AbstractController {
 		}
 	}
 
+	private void getAllMsg(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		int mid = Integer.parseInt( request.getParameter("mid"));
+		
+		MessageDAO mdao = new MessageDAO();
+		ArrayList<MessageVO> resultSet = new ArrayList<MessageVO>();
+		String resultStr = "";
+		
+		try {
+			
+			resultSet = mdao.getAllMsg(mid);
+			
+			if ( resultSet != null) {
+				
+			} else
+				resultStr = "fail";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("result", resultStr);
+		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/result.jsp");
+		rd.forward(request, response);
+	}
+
 	private void sendMsg(HttpServletRequest request,
 			HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		
+		// getParameter
+		int fromid = Integer.parseInt(request.getParameter("fromid"));
+		int toid = Integer.parseInt(request.getParameter("toid"));
+		String msg = request.getParameter("msg");
+		
+		
+		
 		
 	}
 
