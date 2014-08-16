@@ -5,7 +5,6 @@ public class RoomVO {
 	int rid;
 	String name;
 	int hostid;
-	String addr;
 	String doname;
 	String siname;
 	String dongname;
@@ -23,7 +22,26 @@ public class RoomVO {
 	int avaliable;
 	int msex;
 	int wsex;
-	
+	float jaccard;
+	/*/
+	public RoomVO(String name, String doname, String siname, String dongname, String station, int rent, int guaranty, int management, String options, String infos, String rules, int premium, int total, int available, float jaccard){
+		this.name = name;
+		this.doname = doname;
+		this.siname = siname;
+		this.dongname = dongname;
+		this.stationName = station;
+		this.rent = rent;
+		this.guaranty = guaranty;
+		this.management = management;
+		this.options = options;
+		this.infos = infos;
+		this.rules = rules;
+		this.premiumCode = premium;
+		this.total = total;
+		this.avaliable = available;
+		this.jaccard = jaccard;
+	}
+	/*/
 	public int getRid() {
 		return rid;
 	}
@@ -41,12 +59,6 @@ public class RoomVO {
 	}
 	public void setHostid(int hostid) {
 		this.hostid = hostid;
-	}
-	public String getAddr() {
-		return addr;
-	}
-	public void setAddr(String addr) {
-		this.addr = addr;
 	}
 	public String getDoname() {
 		return doname;
@@ -137,7 +149,7 @@ public class RoomVO {
 	// need to convert JSON style
 	public String toString() {
 		return "RoomVO [rid=" + rid + ", name=" + name + ", hostid=" + hostid
-				+ ", addr=" + addr + ", doname=" + doname + ", siname="
+				+ ", doname=" + doname + ", siname="
 				+ siname + ", dongname=" + dongname + ", stationName="
 				+ stationName + ", stationCode=" + stationCode + ", rent="
 				+ rent + ", guaranty=" + guaranty + ", management="
@@ -162,6 +174,12 @@ public class RoomVO {
 	}
 	public void setStyles(String styles) {
 		this.styles = styles;
+	}
+	public float getJaccard() {
+		return jaccard;
+	}
+	public void setJaccard(float jaccard) {
+		this.jaccard = jaccard;
 	}
 	
 }

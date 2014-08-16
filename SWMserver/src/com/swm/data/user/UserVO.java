@@ -3,6 +3,7 @@ package com.swm.data.user;
 public class UserVO {
 	
 	int uid;
+	String password = null;
 	String uname = null;
 	int age;
 	int sex;
@@ -22,6 +23,12 @@ public class UserVO {
 	}
 	public void setUid(int uid) {
 		this.uid = uid;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getUname() {
 		return uname;
