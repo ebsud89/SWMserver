@@ -238,4 +238,38 @@ public class RoomDAO {
 		return RoomList;
 	}
 
+	public ArrayList<RoomVO> getAllRooms() {
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		String query = "SELECT * FROM room";
+		ArrayList<RoomVO> resultSet = new ArrayList<RoomVO>();
+	
+		
+		try {
+			conn = JDBCutils.getConnection();
+			stmt = conn.prepareStatement(query);
+			
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				RoomVO rvo = new RoomVO();
+				rvo.setInfos( rs.getString("infos"));
+				rvo.setRules( rs.getString("rules"));
+				rvo.setStyles( rs.getString("styles"));
+				rvo.setRid( rs.getInt("id"));
+				
+				resultSet.add(rvo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resultSet;
+	}
+
 }

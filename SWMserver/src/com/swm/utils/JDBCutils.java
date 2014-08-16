@@ -9,7 +9,7 @@ public class JDBCutils {
 	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			return DriverManager.getConnection("jdbc:mysql://localhost:3306/Cawing", "root", "ebsud89");
+			return DriverManager.getConnection("jdbc:mysql://54.249.103.4/SWM", "root", "sgen");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

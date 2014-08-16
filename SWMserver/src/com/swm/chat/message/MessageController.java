@@ -43,6 +43,8 @@ public class MessageController extends AbstractController {
 		} else if ("/msg/sendMsg".equals(uri)) {
 			sendMsg(request, response);
 		} else if ("/msg/getMsg".equals(uri)) {
+			getMsg(request, response);
+		} else if ("/msg/getAllMsg".equals(uri)) {
 			getAllMsg(request, response);
 		}
 		else {
@@ -52,10 +54,15 @@ public class MessageController extends AbstractController {
 		}
 	}
 
+	private void getMsg(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void getAllMsg(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		int mid = Integer.parseInt( request.getParameter("mid"));
+//		int mid = Integer.parseInt( request.getParameter("mid"));
 		
 		MessageDAO mdao = new MessageDAO();
 		ArrayList<MessageVO> resultSet = new ArrayList<MessageVO>();
@@ -63,10 +70,11 @@ public class MessageController extends AbstractController {
 		
 		try {
 			
-			resultSet = mdao.getAllMsg(mid);
+			resultSet = mdao.getAllMsg();
 			
 			if ( resultSet != null) {
-				
+				System.out.println(resultSet.toString());
+				resultStr = resultSet.toString();
 			} else
 				resultStr = "fail";
 		} catch (Exception e) {

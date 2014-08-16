@@ -145,18 +145,6 @@ public class RoomVO {
 		this.avaliable = avaliable;
 	}
 	
-	@Override
-	// need to convert JSON style
-	public String toString() {
-		return "RoomVO [rid=" + rid + ", name=" + name + ", hostid=" + hostid
-				+ ", doname=" + doname + ", siname="
-				+ siname + ", dongname=" + dongname + ", stationName="
-				+ stationName + ", stationCode=" + stationCode + ", rent="
-				+ rent + ", guaranty=" + guaranty + ", management="
-				+ management + ", options=" + options + ", infos=" + infos
-				+ ", rules=" + rules + ", premiumCode=" + premiumCode
-				+ ", total=" + total + ", avaliable=" + avaliable + "]";
-	}
 	public int getMsex() {
 		return msex;
 	}
@@ -180,6 +168,18 @@ public class RoomVO {
 	}
 	public void setJaccard(float jaccard) {
 		this.jaccard = jaccard;
+	}
+	
+	@Override
+	public String toString() {
+		return "{\"rid\":\"" + rid + "\", \"name\":\"" + name + "\", \"hostid\":\"" + hostid
+				+ "\", \"stationName\":\"" + stationName + "\", \"stationCode\":\""
+				+ stationCode + "\", \"rent\":\"" + rent + "\", \"guaranty\":\"" + guaranty
+				+ "\", \"management\":\"" + management + "\", \"options\":\"" + options
+				+ "\", \"infos\":" + infos + ", rules=" + rules + ", styles="
+				+ styles + "\", \"premiumCode\":\"" + premiumCode + "\", \"total\":\"" + total
+				+ "\", \"avaliable\":\"" + avaliable + "\", \"msex\":\"" + msex + "\", \"wsex\":\""
+				+ wsex + "\", \"jaccard\":\"" + jaccard + "\"}";
 	}
 	
 }

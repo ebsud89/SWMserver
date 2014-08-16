@@ -283,8 +283,24 @@ public class CommController extends AbstractController {
 	private void getAllRooms(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RoomDAO rDAO = new RoomDAO();
-		rDAO.getAR();
+		
+		ArrayList<RoomVO> resultSet = new ArrayList<RoomVO>();
+		RoomDAO rdao = new RoomDAO();
+		
+		resultSet = rdao.getAllRooms();
+		String resultStr = "";
+		
+		if (resultSet != null) {
+			resultStr = resultSet.toString();
+		} else {
+			resultStr = "fail";
+		}
+		
+		request.setAttribute("result", resultStr);
+		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/result.jsp");
+		rd.forward(request, response);
+		
 	}
 	
 	private void CompareWithRoom(HttpServletRequest request,

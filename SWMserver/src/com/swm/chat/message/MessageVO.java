@@ -34,7 +34,7 @@ public class MessageVO {
 	
 	@Override
 	public String toString() {
-		return "MessageVO [mid=" + mid + ", fromid=" + fromid + ", toid="
-				+ toid + ", text=" + text + "]";
+		return "{\"mid\":\"" + mid + "\", \"fromid\":\"" + fromid + "\", \"toid\":\""
+				+ toid + "\", \"text\":\"" + text + "\"}";
 	}
 }

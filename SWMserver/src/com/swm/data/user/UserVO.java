@@ -37,10 +37,6 @@ public class UserVO {
 		this.uname = uname;
 	}
 	
-	@Override
-	public String toString() {
-		return "UserVO [uid=" + uid + ", uname=" + uname + "]";
-	}
 	public int getAge() {
 		return age;
 	}
@@ -112,6 +108,16 @@ public class UserVO {
 	}
 	public void setAllowsex(int allowsex) {
 		this.allowsex = allowsex;
+	}
+	
+	@Override
+	public String toString() {
+		return "{\"uid\":\"" + uid + "\", \"password\":\"" + password + "\", \"uname\":\""
+				+ uname + "\", \"age\":\"" + age + "\", \"sex\":\"" + sex + "\", \"job\":\"" + job
+				+ "\", \"email\":\"" + email + "\", \"phone\":\"" + phone + "\", \"nick\":\"" + nick
+				+ "\", \"opt\":\"" + opt + "\", \"styles\":\"" + styles + "\", \"role\":\"" + role
+				+ "\", \"fbid\":\"" + fbid + "\", \"rules\":\"" + rules + "\", \"allowsex\":\""
+				+ allowsex + "\"}";
 	}
 
 }
