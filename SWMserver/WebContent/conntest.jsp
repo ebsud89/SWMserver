@@ -3,7 +3,7 @@
 <%@page import="javax.servlet.RequestDispatcher, java.io.*"%>
 
 <%
-	String resultStr = "Connection test complete";
+	String resultStr = "{\"glossary\": {\"title\": \"example glossary\",\"GlossSee\": \"markup\"}}";
 %>
 <%
 	out.print(resultStr);

@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -17,87 +15,119 @@ import com.swm.data.user.UserVO;
 import com.swm.deal.DealVO;
 import com.swm.match.MatchProc;
 import com.swm.utils.JDBCutils;
+import com.swm.utils.JSONutils;
 
 public class RoomDAO {
 
 	private static String GET_ROOM_DETAIL = "SELECT * FROM room WHERE id=?";
-	private static String GET_ALL_ROOMS = "SELECT * FROM room";
-	private static String REG_USER = "insert into room (name,hostid,doname,siname,dongname,stationname,rent,  guaranty, management, options, infos, rules, styles, premiumcode, total, avaliable, msex, wsex) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	// private static String GET_ALL_ROOMS = "SELECT * FROM room";
+	private static String REG_ROOM = "insert into room (name,hostid,station,rent,guaranty,management,options, infos, rules, styles, premiumcode, total, avaliable, msex, wsex, msexr, wsexr)"
+			+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
 	public ArrayList<RoomVO> getMatchRank(UserVO uvo, RoomVO rvo, int sex) {
 		// TODO Auto-generated method stub
 
 		ArrayList<RoomVO> roomList = new ArrayList<RoomVO>();
-		
+
 		// 자료구조 정해야함 ...
 		return roomList;
 	}
 
 	// sql query statements
-	public int regRoom(RoomVO vo) {
+	public int regRoom(String objStr) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
 
-		try {
+		RoomVO vo = new RoomVO();
 
-			conn = JDBCutils.getConnection();
+		System.out.println(objStr + "in");
+		
+		objStr = "{\"4\":[5,{\"6\":7}]}";
+		JSONObject obj = JSONutils.strToObj(objStr);
+		
+		System.out.println(obj.get("4"));
+		
+//		vo.setHostid(Integer.parseInt((String) obj.get("userId")));
+//		vo.setName((String) obj.get("name"));
+////		vo.setHostid(Integer.parseInt((String) obj.get("hostid")));
+//		vo.setStationCode((String) obj.get("stationCode"));
+//		vo.setAvaliable(Integer.parseInt((String) obj.get("available")));
+//		vo.setGuaranty(Integer.parseInt((String) obj.get("guaranty")));
+//		vo.setRent(Integer.parseInt((String) obj.get("rent")));
+//		vo.setManagement(Integer.parseInt((String) obj.get("management")));
+//		vo.setOptions((String) obj.get("options"));
+//		vo.setStyles((String) obj.get("styles"));
+//		vo.setInfos((String) obj.get("infos"));
+//		vo.setRules( (String) obj.get("rules"));
+//		vo.setPremiumCode(Integer.parseInt((String) obj.get("premium")));
+//		vo.setTotal(Integer.parseInt((String) obj.get("total")));
+//		vo.setWsex(Integer.parseInt((String) obj.get("wsex")));
+//		vo.setWsexr(Integer.parseInt((String) obj.get("wsexr")));
+//		vo.setMsex(Integer.parseInt((String) obj.get("msex")));
+//		vo.setMsexr(Integer.parseInt((String) obj.get("msexr")));
 
-			pstmt = conn.prepareStatement(REG_USER);
-
-			int idx = 1;
-
-			// query 수정
-			pstmt.setString(idx++, vo.getName());
-			pstmt.setInt(idx++, vo.getHostid());
-			pstmt.setString(idx++, vo.getDoname());
-			pstmt.setString(idx++, vo.getSiname());
-			pstmt.setString(idx++, vo.getDongname());
-			pstmt.setString(idx++, vo.getStationName());
-			pstmt.setInt(idx++, vo.getRent());
-			pstmt.setInt(idx++, vo.getGuaranty());
-			pstmt.setInt(idx++, vo.getManagement());
-			pstmt.setString(idx++, vo.getOptions());
-			pstmt.setString(idx++, vo.getInfos());
-			pstmt.setString(idx++, vo.getRules());
-			pstmt.setString(idx++, vo.getStyles());
-			pstmt.setInt(idx++, vo.getPremiumCode());
-			pstmt.setInt(idx++, vo.getTotal());
-			pstmt.setInt(idx++, vo.getAvaliable());
-			pstmt.setInt(idx++, vo.getMsex());
-			pstmt.setInt(idx, vo.getWsex());
-			
-			result = pstmt.executeUpdate();
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			JDBCutils.close(pstmt, conn);
-		}
+//		try {
+//
+//			conn = JDBCutils.getConnection();
+//
+//			pstmt = conn.prepareStatement(REG_ROOM);
+//
+//			int idx = 1;
+//
+//			// query 수정
+//			pstmt.setString(idx++, vo.getName());
+//			pstmt.setInt(idx++, vo.getHostid());
+//			pstmt.setString(idx++, vo.getStationCode());
+//			pstmt.setInt(idx++, vo.getRent());
+//			pstmt.setInt(idx++, vo.getGuaranty());
+//			pstmt.setInt(idx++, vo.getManagement());
+//			pstmt.setString(idx++, vo.getOptions());
+//			pstmt.setString(idx++, vo.getInfos());
+//			pstmt.setString(idx++, vo.getRules());
+//			pstmt.setString(idx++, vo.getStyles());
+//			pstmt.setInt(idx++, vo.getPremiumCode());
+//			pstmt.setInt(idx++, vo.getTotal());
+//			pstmt.setInt(idx++, vo.getAvaliable());
+//			pstmt.setInt(idx++, vo.getMsex());
+//			pstmt.setInt(idx, vo.getWsex());
+//			pstmt.setInt(idx++, vo.getMsexr());
+//			pstmt.setInt(idx++, vo.getWsexr());
+//
+//			// System.out.println("query item : %d", idx-1);
+//
+//			result = pstmt.executeUpdate();
+//
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			JDBCutils.close(pstmt, conn);
+//		}
 
 		return result;
 	}
-	
-	public void getAR() {
-		// TODO Auto-generated method stub
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		int result = 0;
 
-		try {
+	// public void getAR() {
+	// // TODO Auto-generated method stub
+	// Connection conn = null;
+	// PreparedStatement stmt = null;
+	// int result = 0;
+	//
+	// try {
+	//
+	// conn = JDBCutils.getConnection();
+	//
+	// // stmt = conn.prepareStatement(GET_ALL_ROOMS);
+	//
+	// result = stmt.executeUpdate();
+	// } catch (Exception ex) {
+	// ex.printStackTrace();
+	// } finally {
+	// JDBCutils.close(stmt, conn);
+	// }
+	// }
 
-			conn = JDBCutils.getConnection();
-
-			stmt = conn.prepareStatement(GET_ALL_ROOMS);
-
-			result = stmt.executeUpdate();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			JDBCutils.close(stmt, conn);
-		}
-	}
-	
 	public RoomVO getRoomDetail(RoomVO rvo) {
 
 		Connection conn = null;
@@ -116,12 +146,13 @@ public class RoomDAO {
 
 			resvo.setRid(rs.getInt("id"));
 			resvo.setName(rs.getString("name"));
-			resvo.setStationName(rs.getString("stationName"));;
+			resvo.setStationName(rs.getString("stationName"));
+			;
 			resvo.setHostid(rs.getInt("hostid"));
 			resvo.setDoname(rs.getString("doname"));
 			resvo.setSiname(rs.getString("siname"));
 			resvo.setDongname(rs.getString("dongname"));
-			resvo.setStationCode(rs.getInt("stationCode"));
+			resvo.setStationCode(rs.getString("station"));
 			resvo.setRent(rs.getInt("rent"));
 			resvo.setGuaranty(rs.getInt("guaranty"));
 			resvo.setManagement(rs.getInt("management"));
@@ -181,7 +212,7 @@ public class RoomDAO {
 				Rvo.setAvaliable(rs.getInt("available"));
 				Rvo.setOptions(rs.getString("options"));
 				Rvo.setJaccard(mp.jaccard_index(dvo.getOptions(),
-							Rvo.getOptions(), dvo.getInfos(), Rvo.getOptions()));
+						Rvo.getOptions(), dvo.getInfos(), Rvo.getOptions()));
 				RoomList.add(Rvo);// RoomList 배열에 jaccard 값 대입
 			}
 			rs.close();
@@ -251,36 +282,46 @@ public class RoomDAO {
 	}
 
 	public ArrayList<RoomVO> getAllRooms() {
-		
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		String query = "SELECT * FROM room";
 		ArrayList<RoomVO> resultSet = new ArrayList<RoomVO>();
-	
-		
+
+		System.out.println("in getAllRooms");
+
 		try {
 			conn = JDBCutils.getConnection();
 			stmt = conn.prepareStatement(query);
-			
+
 			rs = stmt.executeQuery();
-			
+
 			while (rs.next()) {
-				
+
 				RoomVO rvo = new RoomVO();
-				rvo.setInfos( rs.getString("infos"));
-				rvo.setRules( rs.getString("rules"));
-				rvo.setStyles( rs.getString("styles"));
-				rvo.setRid( rs.getInt("id"));
-				
+				rvo.setName(rs.getString("name"));
+				rvo.setHostid(rs.getInt("hostid"));
+				rvo.setAvaliable(rs.getInt("available"));
+				rvo.setTotal(rs.getInt("total"));
+				rvo.setInfos(rs.getString("infos"));
+				rvo.setRules(rs.getString("rules"));
+				rvo.setStyles(rs.getString("styles"));
+				rvo.setRid(rs.getInt("id"));
+				rvo.setStationCode(rs.getString("station"));
+				rvo.setGuaranty(rs.getInt("guaranty"));
+				rvo.setManagement(rs.getInt("management"));
+				rvo.setRent(rs.getInt("rent"));
+				rvo.setMsex(rs.getInt("msex"));
+				rvo.setWsex(rs.getInt("wsex"));
 				resultSet.add(rvo);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return resultSet;
 	}
 

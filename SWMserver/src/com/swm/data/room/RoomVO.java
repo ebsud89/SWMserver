@@ -9,7 +9,7 @@ public class RoomVO {
 	String siname;
 	String dongname;
 	String stationName;
-	int stationCode;
+	String stationCode;
 	int rent;
 	int guaranty;
 	int management;
@@ -22,6 +22,8 @@ public class RoomVO {
 	int avaliable;
 	int msex;
 	int wsex;
+	int wsexr;
+	int msexr;
 	float jaccard;
 	/*/
 	public RoomVO(String name, String doname, String siname, String dongname, String station, int rent, int guaranty, int management, String options, String infos, String rules, int premium, int total, int available, float jaccard){
@@ -84,10 +86,10 @@ public class RoomVO {
 	public void setStationName(String stationName) {
 		this.stationName = stationName;
 	}
-	public int getStationCode() {
+	public String getStationCode() {
 		return stationCode;
 	}
-	public void setStationCode(int stationCode) {
+	public void setStationCode(String stationCode) {
 		this.stationCode = stationCode;
 	}
 	public int getRent() {
@@ -176,10 +178,22 @@ public class RoomVO {
 				+ "\", \"stationName\":\"" + stationName + "\", \"stationCode\":\""
 				+ stationCode + "\", \"rent\":\"" + rent + "\", \"guaranty\":\"" + guaranty
 				+ "\", \"management\":\"" + management + "\", \"options\":\"" + options
-				+ "\", \"infos\":" + infos + ", rules=" + rules + ", styles="
+				+ "\", \"infos\":\"" + infos + "\", \"rules\":\"" + rules + "\", \"styles\":\""
 				+ styles + "\", \"premiumCode\":\"" + premiumCode + "\", \"total\":\"" + total
 				+ "\", \"avaliable\":\"" + avaliable + "\", \"msex\":\"" + msex + "\", \"wsex\":\""
-				+ wsex + "\", \"jaccard\":\"" + jaccard + "\"}";
+				+ wsex + "\", \"jaccard\":\"" + jaccard + "\", \"wsexr\":\"" +wsexr + "\", \"msexr\" :\"" + msexr + "\" }";
+	}
+	public int getWsexr() {
+		return wsexr;
+	}
+	public void setWsexr(int wsexr) {
+		this.wsexr = wsexr;
+	}
+	public int getMsexr() {
+		return msexr;
+	}
+	public void setMsexr(int msexr) {
+		this.msexr = msexr;
 	}
 	
 }

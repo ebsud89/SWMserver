@@ -5,7 +5,6 @@ import java.sql.*;
 public class JDBCutils {
 	public static Connection getConnection() {
 		try {
-//			Class.forName("com.mysql.jdbc.Driver");
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection("jdbc:mysql://54.249.103.4/SWM", "root", "sgen");
 		} catch (Exception e) {

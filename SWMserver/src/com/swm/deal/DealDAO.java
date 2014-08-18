@@ -2,8 +2,8 @@ package com.swm.deal;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.swm.data.room.RoomVO;
 

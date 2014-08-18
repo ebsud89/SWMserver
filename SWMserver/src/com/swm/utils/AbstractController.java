@@ -21,7 +21,7 @@ public class AbstractController extends HttpServlet{
 			uri = uri.substring(0, idx);
 		}
 
-		System.out.println("URI :" + uri);
+		System.out.println("URI : " + uri);
 
 		return uri;
 	}
