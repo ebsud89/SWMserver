@@ -21,8 +21,9 @@ public class RoomDAO {
 
 	private static String GET_ROOM_DETAIL = "SELECT * FROM room WHERE id=?";
 	// private static String GET_ALL_ROOMS = "SELECT * FROM room";
-	private static String REG_ROOM = "insert into room (name,hostid,station,rent,guaranty,management,options, infos, rules, styles, premiumcode, total, avaliable, msex, wsex, msexr, wsexr)"
-			+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static String REG_ROOM = "insert into room (name,hostid,station,rent,guaranty,management,options, infos, rules, styles, guarants, premium, total, avaliable, time, way, msex, wsex, msexr, wsexr)"
+			+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static String REG_SAMPLE = "insert into room (name,hostid) values (?,?)";
 
 	public ArrayList<RoomVO> getMatchRank(UserVO uvo, RoomVO rvo, int sex) {
 		// TODO Auto-generated method stub
@@ -34,7 +35,7 @@ public class RoomDAO {
 	}
 
 	// sql query statements
-	public int regRoom(String objStr) {
+	public int regRoom(JSONObject obj) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -42,16 +43,12 @@ public class RoomDAO {
 
 		RoomVO vo = new RoomVO();
 
-		System.out.println(objStr + "in");
+		System.out.println(obj.get("userId"));
 		
-		objStr = "{\"4\":[5,{\"6\":7}]}";
-		JSONObject obj = JSONutils.strToObj(objStr);
-		
-		System.out.println(obj.get("4"));
-		
-//		vo.setHostid(Integer.parseInt((String) obj.get("userId")));
-//		vo.setName((String) obj.get("name"));
-////		vo.setHostid(Integer.parseInt((String) obj.get("hostid")));
+		try {
+		vo.setHostid(Integer.parseInt((String) obj.get("userId")));
+		vo.setName((String) obj.get("name"));
+//		vo.setHostid(Integer.parseInt((String) obj.get("hostid")));
 //		vo.setStationCode((String) obj.get("stationCode"));
 //		vo.setAvaliable(Integer.parseInt((String) obj.get("available")));
 //		vo.setGuaranty(Integer.parseInt((String) obj.get("guaranty")));
@@ -67,18 +64,21 @@ public class RoomDAO {
 //		vo.setWsexr(Integer.parseInt((String) obj.get("wsexr")));
 //		vo.setMsex(Integer.parseInt((String) obj.get("msex")));
 //		vo.setMsexr(Integer.parseInt((String) obj.get("msexr")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
 
-//		try {
-//
-//			conn = JDBCutils.getConnection();
-//
-//			pstmt = conn.prepareStatement(REG_ROOM);
-//
-//			int idx = 1;
-//
-//			// query 수정
-//			pstmt.setString(idx++, vo.getName());
-//			pstmt.setInt(idx++, vo.getHostid());
+			conn = JDBCutils.getConnection();
+
+			pstmt = conn.prepareStatement(REG_SAMPLE);
+
+			int idx = 1;
+
+			// query 수정
+			pstmt.setString(idx++, vo.getName());
+			pstmt.setInt(idx++, vo.getHostid());
 //			pstmt.setString(idx++, vo.getStationCode());
 //			pstmt.setInt(idx++, vo.getRent());
 //			pstmt.setInt(idx++, vo.getGuaranty());
@@ -87,23 +87,24 @@ public class RoomDAO {
 //			pstmt.setString(idx++, vo.getInfos());
 //			pstmt.setString(idx++, vo.getRules());
 //			pstmt.setString(idx++, vo.getStyles());
+//			pstmt.setString(idx++, vo.getGuarants());
 //			pstmt.setInt(idx++, vo.getPremiumCode());
 //			pstmt.setInt(idx++, vo.getTotal());
 //			pstmt.setInt(idx++, vo.getAvaliable());
+//			pstmt.setInt(idx++, vo.getTime());
+//			pstmt.setInt(idx++, vo.getWay());
 //			pstmt.setInt(idx++, vo.getMsex());
 //			pstmt.setInt(idx, vo.getWsex());
 //			pstmt.setInt(idx++, vo.getMsexr());
 //			pstmt.setInt(idx++, vo.getWsexr());
-//
-//			// System.out.println("query item : %d", idx-1);
-//
-//			result = pstmt.executeUpdate();
-//
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			JDBCutils.close(pstmt, conn);
-//		}
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			JDBCutils.close(pstmt, conn);
+		}
 
 		return result;
 	}

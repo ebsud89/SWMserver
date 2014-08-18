@@ -206,15 +206,15 @@ public class CommController extends AbstractController {
 		// int msex = Integer.parseInt(request.getParameter("msex"));
 		// int wsex = Integer.parseInt(request.getParameter("wsex"));
 		String objStr = request.getParameter("ROOM");
-
-		RoomVO vo = new RoomVO();
+		
 		RoomDAO rdao = new RoomDAO();
 		int result = 0;
+		String resultStr = "";
 
 		JSONObject obj;
 		obj = JSONutils.strToObj(objStr);
 		
-		String resultStr = null;
+		result = rdao.regRoom(obj);
 
 		if (result == 1) {
 			resultStr = "success";

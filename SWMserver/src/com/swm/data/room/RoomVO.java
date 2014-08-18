@@ -25,6 +25,9 @@ public class RoomVO {
 	int wsexr;
 	int msexr;
 	float jaccard;
+	String guarants;
+	int way;
+	int time;
 	/*/
 	public RoomVO(String name, String doname, String siname, String dongname, String station, int rent, int guaranty, int management, String options, String infos, String rules, int premium, int total, int available, float jaccard){
 		this.name = name;
@@ -181,7 +184,7 @@ public class RoomVO {
 				+ "\", \"infos\":\"" + infos + "\", \"rules\":\"" + rules + "\", \"styles\":\""
 				+ styles + "\", \"premiumCode\":\"" + premiumCode + "\", \"total\":\"" + total
 				+ "\", \"avaliable\":\"" + avaliable + "\", \"msex\":\"" + msex + "\", \"wsex\":\""
-				+ wsex + "\", \"jaccard\":\"" + jaccard + "\", \"wsexr\":\"" +wsexr + "\", \"msexr\" :\"" + msexr + "\" }";
+				+ wsex + "\", \"jaccard\":\"" + jaccard + "\", \"wsexr\":\"" +wsexr + "\", \"msexr\" :\"" + msexr + "\",\"guarants\":\"" + guarants + "\", \"way\":\""+ way +"\", \"time\":\""+time + "\" }";
 	}
 	public int getWsexr() {
 		return wsexr;
@@ -194,6 +197,25 @@ public class RoomVO {
 	}
 	public void setMsexr(int msexr) {
 		this.msexr = msexr;
+	}
+	
+	public void setGuarants(String guarants) {
+		this.guarants = guarants;
+	}
+	public String getGuarants() {
+		return this.guarants;
+	}
+	public int getWay() {
+		return way;
+	}
+	public void setWay(int way) {
+		this.way = way;
+	}
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
 	}
 	
 }
