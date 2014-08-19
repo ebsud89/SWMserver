@@ -145,14 +145,9 @@ public class RoomDAO {
 
 			rs = stmt.executeQuery();
 
-			resvo.setRid(rs.getInt("id"));
+			resvo.setRid(rvo.getRid());
 			resvo.setName(rs.getString("name"));
-			resvo.setStationName(rs.getString("stationName"));
-			;
 			resvo.setHostid(rs.getInt("hostid"));
-			resvo.setDoname(rs.getString("doname"));
-			resvo.setSiname(rs.getString("siname"));
-			resvo.setDongname(rs.getString("dongname"));
 			resvo.setStationCode(rs.getString("station"));
 			resvo.setRent(rs.getInt("rent"));
 			resvo.setGuaranty(rs.getInt("guaranty"));
@@ -161,11 +156,16 @@ public class RoomDAO {
 			resvo.setInfos(rs.getString("infos"));
 			resvo.setRules(rs.getString("rules"));
 			resvo.setStyles(rs.getString("styles"));
-			resvo.setPremiumCode(rs.getInt("premiumCode"));
+			resvo.setGuarants(rs.getString("guarants"));
+			resvo.setPremiumCode(rs.getInt("premium"));
 			resvo.setTotal(rs.getInt("total"));
 			resvo.setAvaliable(rs.getInt("avaliable"));
+			resvo.setTime(rs.getInt("time"));
+			resvo.setWay(rs.getInt("way"));
 			resvo.setMsex(rs.getInt("msex"));
+			resvo.setMsexr(rs.getInt("msexr"));
 			resvo.setWsex(rs.getInt("wsex"));
+			resvo.setWsexr(rs.getInt("wsexr"));
 			// more attribute
 
 		} catch (Exception e) {
